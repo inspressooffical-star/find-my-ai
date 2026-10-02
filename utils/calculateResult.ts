@@ -8,13 +8,15 @@ export function createEmptyTraits(): UserTraits {
   }, {} as UserTraits);
 }
 
-export function calculateUserTraits(selectedAnswers: Record<number, QuestionOption>): UserTraits {
+export function calculateUserTraits(selectedAnswers: Record<number, QuestionOption[]>): UserTraits {
   const totals = createEmptyTraits();
 
-  Object.values(selectedAnswers).forEach((option) => {
-    Object.entries(option.scores).forEach(([trait, value]) => {
-      const traitKey = trait as TraitKey;
-      totals[traitKey] += value ?? 0;
+  Object.values(selectedAnswers).forEach((options) => {
+    options.forEach((option) => {
+      Object.entries(option.scores).forEach(([trait, value]) => {
+        const traitKey = trait as TraitKey;
+        totals[traitKey] += value ?? 0;
+      });
     });
   });
 
