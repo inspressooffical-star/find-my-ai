@@ -11,20 +11,20 @@ import { calculateAiMatches, calculateUserTraits, getTopTraitMeta } from '@/util
 export default function HomePage() {
   const [stage, setStage] = useState<'intro' | 'quiz' | 'result'>('intro');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, QuestionOption>>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, QuestionOption[]>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const question = questions[currentIndex];
 
   const userTraits = useMemo<UserTraits>(() => calculateUserTraits(selectedAnswers), [selectedAnswers]);
 
-  const handleAnswer = (option: QuestionOption) => {
+  const handleAnswer = (options: QuestionOption[]) => {
     setIsTransitioning(true);
 
     setTimeout(() => {
       setSelectedAnswers((prev) => ({
         ...prev,
-        [currentIndex]: option,
+        [currentIndex]: options,
       }));
 
       if (currentIndex === questions.length - 1) {
@@ -58,7 +58,6 @@ export default function HomePage() {
     return (
       <ResultScreen
         matches={matches}
-        userTraits={userTraits}
         topAi={topAi}
         secondaryAi={secondaryAi}
         topTraits={topTraits}
