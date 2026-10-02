@@ -40,6 +40,14 @@ export default function ResultScreen({ matches, topAi, secondaryAi, topTraits, o
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-violet-50 via-white to-slate-50 px-4 py-8">
       <div className="w-full max-w-[480px] space-y-5">
         <div className="card-surface p-5 sm:p-6">
+          <div className="mb-6 flex justify-center">
+            <img
+              src={topAi.logoUrl}
+              alt={`${topAi.name} 로고`}
+              className="h-20 w-20 rounded-2xl border border-slate-200 bg-white object-contain p-3 shadow-sm"
+            />
+          </div>
+
           <div className="mb-6 text-center">
             <p className="text-sm uppercase tracking-[0.2em] text-brand-700">당신의 AI 파트너는</p>
             <h2 className="mt-2 text-balance text-3xl font-bold text-slate-900">{topAi.name}</h2>
@@ -72,9 +80,12 @@ export default function ResultScreen({ matches, topAi, secondaryAi, topTraits, o
           <h3 className="mb-4 text-lg font-bold text-slate-900">함께 쓰면 좋은 AI</h3>
           <div className="rounded-2xl bg-slate-50 p-4">
             <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xl font-bold text-slate-900">{secondaryAi.name}</p>
-                <p className="mt-1 text-sm text-slate-600">{secondaryAi.bestFor}</p>
+              <div className="flex items-center gap-3">
+                <img src={secondaryAi.logoUrl} alt={`${secondaryAi.name} 로고`} className="h-9 w-9 rounded-xl border border-slate-200 bg-white object-contain p-1.5" />
+                <div>
+                  <p className="text-xl font-bold text-slate-900">{secondaryAi.name}</p>
+                  <p className="mt-1 text-sm text-slate-600">{secondaryAi.bestFor}</p>
+                </div>
               </div>
               <span className="rounded-full bg-white px-2.5 py-1 text-sm font-semibold text-brand-700 shadow-sm">
                 {secondaryAi.score}%
